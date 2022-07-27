@@ -1,0 +1,36 @@
+<div>
+  <div class="row">
+    <div class="col-9" style="text-align: center"><h1>Danh Sách các Tour</h1></div>
+    <div class="col-3" style="padding: 20px">
+      <button class="btn btn-primary" routerLink="/create">Thêm Tour mới</button>
+    </div>
+  </div>
+  <table class="table">
+    <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Tên</th>
+      <th scope="col">Giá</th>
+      <th scope="col">Tùy chọn</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let tour of tours, index as i">
+      <th scope="row">{{i + 1}}</th>
+      <td><a [routerLink]="['/detail', tour.id]">{{tour.title}}</a></td>
+      <td>{{tour.price}}</td>
+      <td>
+        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+          <label>
+            <button type="button" [routerLink]="['/edit', tour.id]" class="btn btn-primary">Sửa</button>
+          </label>
+          <label>
+            <button type="button" [routerLink]="['/delete', tour.id]" class="btn btn-danger">Xóa</button>
+          </label>
+        </div>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
