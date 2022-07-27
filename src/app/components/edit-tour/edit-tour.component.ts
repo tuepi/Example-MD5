@@ -3,6 +3,7 @@ import {Tour} from "../../models/tour";
 import {TourService} from "../../services/tour.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {FormControl, FormGroup} from "@angular/forms";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-edit-tour',
@@ -23,7 +24,8 @@ export class EditTourComponent implements OnInit {
 
   constructor(private tourService : TourService,
               private router : Router,
-              private activatedRoute : ActivatedRoute) { }
+              private activatedRoute : ActivatedRoute,
+              private toast : NgToastService) { }
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(parammap => {
@@ -48,8 +50,8 @@ export class EditTourComponent implements OnInit {
       description: this.editForm.value.description
     }
     this.tourService.editTour(this.id, this.tour).subscribe(() => {
+      this.toast.success({detail: "THÔNG BÁO", summary: "Sửa thành công",duration: 3000})
       this.router.navigateByUrl("/")
-      alert("Đã sửa xong!!")
     }, error => {
       console.log(error)
     })

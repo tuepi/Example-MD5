@@ -10,6 +10,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {ReactiveFormsModule} from "@angular/forms";
 import { EditTourComponent } from './components/edit-tour/edit-tour.component';
 import { DeleteTourComponent } from './components/delete-tour/delete-tour.component';
+import {NgToastModule} from "ng-angular-popup";
 
 @NgModule({
   declarations: [
@@ -24,7 +25,9 @@ import { DeleteTourComponent } from './components/delete-tour/delete-tour.compon
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgToastModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

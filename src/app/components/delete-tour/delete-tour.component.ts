@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Tour} from "../../models/tour";
 import {TourService} from "../../services/tour.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-delete-tour',
@@ -16,7 +17,8 @@ export class DeleteTourComponent implements OnInit {
 
   constructor(private tourService: TourService,
               private router: Router,
-              private activatedRoute: ActivatedRoute) {
+              private activatedRoute: ActivatedRoute,
+              private toast : NgToastService) {
   }
 
   ngOnInit(): void {
@@ -34,8 +36,8 @@ export class DeleteTourComponent implements OnInit {
   deleteTour() {
     if (confirm("Bạn có muốn xóa không?")) {
       this.tourService.deleteTour(this.id).subscribe(() => {
+        this.toast.success({detail: "THÔNG BÁO", summary: "Xóa thành công",duration: 3000})
         this.router.navigateByUrl("/");
-        alert("Đã xóa xong!!")
       }, error => {
         console.log(error)
       });

@@ -3,6 +3,7 @@ import {FormControl, FormGroup} from "@angular/forms";
 import {Tour} from "../../models/tour";
 import {TourService} from "../../services/tour.service";
 import {Router} from "@angular/router";
+import {NgToastService} from "ng-angular-popup";
 
 @Component({
   selector: 'app-create-tour',
@@ -20,7 +21,8 @@ export class CreateTourComponent implements OnInit {
   tour : Tour | any;
 
   constructor(private tourService : TourService,
-              private router : Router) { }
+              private router : Router,
+              private toast: NgToastService) { }
 
   ngOnInit(): void {
   }
@@ -32,9 +34,10 @@ export class CreateTourComponent implements OnInit {
       description: this.form.value.description
     }
     this.tourService.createTour(this.tour).subscribe(() => {
-      alert("Thêm Thành  Công");
+      this.toast.success({detail: "THÔNG BÁO", summary: "Thêm thành công",duration: 3000})
       this.router.navigateByUrl('/')
     }, error => {
+      this.toast.error({detail: "THÔNG BÁO", summary: "Lỗi",duration: 3000})
       console.log(error);
     });
   }
